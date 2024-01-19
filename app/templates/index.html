@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Bibliographie</title>
+
+    <style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">Synthèse Bibliographique</h1>
+    <!-- templates/index.html -->
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" scope="col" style="text-align: center;">Titre</th>
+                <th scope="col" scope="col" style="text-align: center;">Année</th>
+                <th scope="col" scope="col" style="text-align: center;">Article</th>
+                <th scope="col" scope="col" style="text-align: center;">Mots-clés</th>
+                <th scope="col" scope="col" style="text-align: center;">Article en PDF</th>
+                <th scope="col" scope="col" style="text-align: center;">Résumé de l'article</th>
+                <th scope="col" scope="col" style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles|sort(attribute='year')|reverse %}
+                <tr>
+                    <td><b>{{ article.title }}</b></td>
+                    <td>{{ article.year }}</td>
+                    <td>{{ article.resume_titre }}</td>
+                    <td>{{ article.keywords }}</td>
+                    <td>
+                        <!-- Lien pour lire le fichier -->
+                        <a href="{{ url_for('read_file', article_id=article.id) }}" target="_blank">Lire l'article</a>
+                    </td>
+                    <td>
+                        <!-- Lien pour lire le résumé -->
+                        <a href="{{ url_for('resume_article', article_id=article.id) }}" target="_blank">Lire le résumé</a>
+                    </td>
+                    <td>
+                        <!-- Bouton de suppression -->
+                        <form action="{{ url_for('delete_article', article_id=article.id) }}" method="post">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                        <form action="{{ url_for('edit_article', article_id=article.id) }}" method="post">
+                            <button type="submit" class="btn btn-danger">Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   
+    <a href="{{ url_for('add_article') }}">Ajouter un article</a>
+    <a href="{{ url_for('keyword_stats') }}">Index des mots clés</a>
+    <a href="{{ url_for('search') }}">Faire une recherche par mots-clés</a>
+    <a href="{{ url_for('transform') }}">Conversion</a>
+
+</body>
+</html>

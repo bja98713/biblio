@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé de l'article</title>
+    <style>
+        .summary-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Résumé de l'article</h1>
+    <p class="summary-text">{{ article.resume_article | safe}}</p>
+    <a href="{{ url_for('index') }}">Retour à la liste</a>
+</body>
+</html>

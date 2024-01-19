@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de la recherche</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+            </style>
+</head>
+<body>
+    <h1>Résultats pour : "{{ search_keywords }}"</h1>
+    
+    <table>
+        <tr>
+            <th scope="col" style="text-align: center;">Titre</th>
+            <th scope="col" style="text-align: center;">Année</th>
+            <th scope="col" style="text-align: center;">Resume PubMed</th>
+        </tr>
+        {% for article in articles %}
+            <tr>
+                <td><a href="{{ url_for('read_file', article_id=article.id) }}">{{ article.title }}</a></td>
+                <td scope="col" style="text-align: center;">{{ article.year }}</td>
+                <td scope="col" style="text-align: center;">{{ article.resume_titre }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('add_article') }}">Ajouter un article</a>
+    <a href="{{ url_for('keyword_stats') }}">Index des mots clés</a>
+    <a href="{{ url_for('search') }}">Retour vers Recherche</a>
+    <a href="{{ url_for('index') }}">Retour à l'accueil</a>
+</body>
+</html>

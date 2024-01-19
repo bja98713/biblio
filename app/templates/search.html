@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche d'articles</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+</style>
+</head>
+<body>
+    <h1>Recherche d'Article par Mots-clés</h1>
+    
+    <form method="post" action="{{ url_for('search') }}">
+        <label for="search_keywords">Entrez les mots-clés (séparation par une virgule): </label>
+        <input type="text" name="search_keywords" id="search_keywords" required>
+        <button type="submit">Search</button>
+    </form>
+    <a href="{{ url_for('add_article') }}">Ajouter un article</a>
+    <a href="{{ url_for('keyword_stats') }}">Index des mots clés</a>
+    <a href="{{ url_for('index') }}">Retour à l'accueil</a>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un article</title>
+    <style>
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    border: none;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    color: #333;
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+    <h1>Ajouter un article</h1>
+
+    <form action="{{ url_for('add_article') }}" method="post" enctype="multipart/form-data">
+        <label for="title">Titre:</label>
+        <input type="text" name="title" required><br>
+        <label for="year">Année:</label>
+        <input type="number" name="year" required><br>
+        <label for="resume_titre">Titre (format PUMED):</label>
+        <input type="text" name="resume_titre" required><br>
+        <label for="keywords">Mots-clés:</label>
+        <input type="text" name="keywords" required><br>
+        <label for="resume_article">Résumé de l'article :</label>
+        <textarea name="resume_article" rows="10" required></textarea><br>
+        <label for="html_title">Titre HTML:</label>
+        <input type="text" name="html_title" required><br>
+        <label for="file">Fichier PDF:</label>
+        <input type="file" name="file" accept=".pdf" required><br>
+        <input type="submit" value="Ajouter">
+    </form>
+
+    <a href="{{ url_for('index') }}">Retour à la liste</a>
+    </div>
+</body>
+</html>

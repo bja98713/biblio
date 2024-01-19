@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformation Markdown vers HTML</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bibliographie</h1>
+    
+
+    <form action="{{ url_for('transform') }}" method="post" enctype="multipart/form-data">
+        <label for="md_file">Choisir un fichier Markdown :</label>
+        <input type="file" name="md_file" accept=".md" required>
+        <input type="submit" value="Convertir en HTML">
+    </form>
+</body>
+</html>

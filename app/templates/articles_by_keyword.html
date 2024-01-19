@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles par Mots-Clés</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Articles contenant "{{ keyword }}"</h1>
+    
+    <ul>
+        {% for article in articles %}
+            <li><a href="{{ url_for('read_file', article_id=article.id) }}">{{ article.title }} / {{ article.year }} / {{ article.resume_titre }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

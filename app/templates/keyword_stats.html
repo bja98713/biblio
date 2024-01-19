@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index des Mots-Clés</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+            </style>
+</head>
+<body>
+    <h1>Index des Mots-Clés</h1>
+    
+    <table>
+        <tr>
+            <th scope="col" style="text-align: center;">Mots-Clés</th>
+            <th scope="col" style="text-align: center;">Fréquence</th>
+            <th scope="col" style="text-align: center;">Liens vers les articles</th>
+        </tr>
+        {% for keyword in keyword_counts|dictsort %}
+            <tr>
+                <td>{{ keyword[0] }}</td>
+                <td scope="col" style="text-align: center;">{{ keyword[1] }}</td>
+                <td scope="col" style="text-align: center;"><a href="{{ url_for('articles_by_keyword', keyword=keyword[0]) }}">Voir les articles</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('search') }}">Rechercher un article</a>
+    <a href="{{ url_for('keyword_stats') }}">Index des mots clés</a>
+    <a href="{{ url_for('index') }}">Retour à l'accueil</a>
+</body>
+</html>

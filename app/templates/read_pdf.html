@@ -1,0 +1,40 @@
+<!-- templates/read_pdf.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+
+    <!-- Ajoutez cette ligne pour inclure la bibliothèque PDF.js -->
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+
+    <!-- Ajoutez une balise <canvas> pour afficher le PDF -->
+    <canvas id="pdfCanvas"></canvas>
+
+    <script>
+        var pdfUrl = "{{ url_for('read_pdf', article_id=article.id) }}";
+
+        // Chargement du PDF avec PDF.js
+        pdfjsLib.getDocument(pdfUrl).promise.then(function(pdfDoc) {
+            // Affiche la première page du PDF
+            pdfDoc.getPage(1).then(function(page) {
+                var canvas = document.getElementById('pdfCanvas');
+                var context = canvas.getContext('2d');
+
+                // Définir la taille du canvas selon la taille de la première page
+                var viewport = page.getViewport({ scale: 1.5 });
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                // Affiche la première page sur le canvas
+                page.render({ canvasContext: context, viewport: viewport });
+            });
+        });
+    </script>
+</body>
+</html>
